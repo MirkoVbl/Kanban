@@ -4,10 +4,7 @@ package com.example.backend.repo;
 import com.example.backend.model.ToDo;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class ToDoRepo {
@@ -20,4 +17,25 @@ public class ToDoRepo {
         return new ArrayList<ToDo>(toDos.values());
     }
 
+    public ToDo addToDo(ToDo toDo) {
+        toDos.put(toDo.getId(), toDo);
+        return toDo;
+    }
+
+    public Map<String, ToDo> getToDos() {
+        return toDos;
+    }
+
+    public ToDo addNewToDo(ToDo toDo) {
+        return toDos.put(toDo.getId(), toDo);
+    }
+
+    public ToDo getById(String id) {
+        for (ToDo toDo : toDos.values()) {
+            if (toDo.getId().equals(id)) {
+                return toDo;
+            }
+        }
+        throw new NoSuchElementException("Es gibt keine Treffer mit der id: " +id);
+    }
 }
