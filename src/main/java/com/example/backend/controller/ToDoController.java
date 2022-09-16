@@ -1,8 +1,9 @@
-package controller;
+package com.example.backend.controller;
 
 import com.example.backend.model.ToDo;
 import com.example.backend.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ public class ToDoController {
         this.todoService = toDoService;
     }
 
+    @GetMapping
     public List<ToDo> getAllToDos(){
         return todoService.getAllToDos();
     }

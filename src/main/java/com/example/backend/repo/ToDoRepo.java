@@ -14,13 +14,10 @@ public class ToDoRepo {
 
     private Map<String, ToDo> toDos = new HashMap<>(
             Map.of(
-                    "1", new ToDo("Wash the car", "1", "OPEN")));
+                    "1", new ToDo("Wash the car", "OPEN", "1")));
 
     public List<ToDo> getAllToDos(){
         return new ArrayList<ToDo>(toDos.values());
     }
-
-
-
 
 }
