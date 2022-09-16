@@ -17,25 +17,22 @@ public class ToDoRepo {
         return new ArrayList<ToDo>(toDos.values());
     }
 
-    public ToDo addToDo(ToDo toDo) {
-        toDos.put(toDo.getId(), toDo);
-        return toDo;
-    }
-
-    public Map<String, ToDo> getToDos() {
-        return toDos;
-    }
+    public ToDo getById(String id) {
+                return toDos.get(id);
+            }
 
     public ToDo addNewToDo(ToDo toDo) {
         return toDos.put(toDo.getId(), toDo);
     }
 
-    public ToDo getById(String id) {
-        for (ToDo toDo : toDos.values()) {
-            if (toDo.getId().equals(id)) {
-                return toDo;
-            }
-        }
-        throw new NoSuchElementException("Es gibt keine Treffer mit der id: " +id);
+    public ToDo changeToDo(ToDo changeToDo) {
+        toDos.get(changeToDo.getId()).setStatus(changeToDo.getStatus());
+        toDos.get(changeToDo.getId()).setDescription(changeToDo.getDescription());
+        return toDos.get(changeToDo.getId());
+    }
+
+
+    public Map<String, ToDo> getToDos() {
+        return toDos;
     }
 }

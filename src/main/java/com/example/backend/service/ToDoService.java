@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class ToDoService {
@@ -16,18 +15,20 @@ public class ToDoService {
     private ToDoRepo toDoRepo;
 
 
-
     @Autowired
+
     public ToDoService(ToDoRepo toDoRepo) {
         this.toDoRepo = toDoRepo;
     }
+
+
 
     public List<ToDo> getAllToDos(){
         return toDoRepo.getAllToDos();
     }
 
     public ToDo addToDo (ToDo toDo){
-        return toDoRepo.addToDo(toDo);
+        return toDoRepo.addNewToDo(toDo);
     }
 
     public ToDo postNewToDo(ToDo toDo){
@@ -42,4 +43,12 @@ public class ToDoService {
         return toDoRepo.getById(id);
     }
 
+    public ToDo changeToDo(String id, ToDo toDoDetails) {
+        Map<String, ToDo> presentToDos = toDoRepo.getToDos();
+        ToDo changeToDo = presentToDos.get(id);
+
+        changeToDo.setStatus(toDoDetails.getStatus());
+        changeToDo.setDescription(toDoDetails.getDescription());
+        return toDoRepo.changeToDo(changeToDo);
+    }
 }
