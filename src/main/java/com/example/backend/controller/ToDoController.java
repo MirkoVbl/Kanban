@@ -31,14 +31,22 @@ public class ToDoController {
 
 
     @GetMapping("{id}")
-    public ToDo getToDo(@PathVariable String id){
-        return todoService.getToDo(id);
+    public ToDo getById(@PathVariable String id){
+        return todoService.getById(id);
     }
 
     @PutMapping
     public ToDo changeToDo(@PathVariable String id, @RequestBody ToDo toDo){
         return  todoService.changeToDo(id, toDo);
     }
+
+    @DeleteMapping("{id}")
+    public ToDo deleteToDo(@PathVariable String id){
+        return todoService.deleteToDo(id);
+    }
+
+
+
 
 
 

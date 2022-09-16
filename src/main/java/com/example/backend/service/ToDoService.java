@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Service
 public class ToDoService {
@@ -16,22 +17,15 @@ public class ToDoService {
 
 
     @Autowired
-
     public ToDoService(ToDoRepo toDoRepo) {
         this.toDoRepo = toDoRepo;
     }
-
-
 
     public List<ToDo> getAllToDos(){
         return toDoRepo.getAllToDos();
     }
 
     public ToDo addToDo (ToDo toDo){
-        return toDoRepo.addNewToDo(toDo);
-    }
-
-    public ToDo postNewToDo(ToDo toDo){
         Map<String ,ToDo> presentToDos = toDoRepo.getToDos();
             int newId1 = presentToDos.size()+1;
             String newId = String.valueOf(newId1);
@@ -39,7 +33,11 @@ public class ToDoService {
             return toDoRepo.addNewToDo(toDo);
 
     }
-    public ToDo getToDo(String id){
+    public ToDo getById(String id){
+        ToDo foundToDo = toDoRepo.getById(id);
+        if(foundToDo == null){
+            throw new NoSuchElementException("No ToDo was found with id: " + id);
+        }
         return toDoRepo.getById(id);
     }
 
@@ -50,5 +48,9 @@ public class ToDoService {
         changeToDo.setStatus(toDoDetails.getStatus());
         changeToDo.setDescription(toDoDetails.getDescription());
         return toDoRepo.changeToDo(changeToDo);
+    }
+
+    public ToDo deleteToDo(String id) {
+        return toDoRepo.deleteToDo(id);
     }
 }
