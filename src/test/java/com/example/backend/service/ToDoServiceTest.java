@@ -32,6 +32,7 @@ class ToDoServiceTest {
         //WHEN
         List<ToDo> actual = toDoService.getAllToDos();
 
+
         //THEN
         assertEquals(toDos, actual);
 
